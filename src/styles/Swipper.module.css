@@ -1,0 +1,11 @@
+.swiper{
+    overflow: visible !important;
+}
+.swiperContainer{padding: 30px 0 0;}
+.swiper .swiper-pagination{
+    top: 25px !important;
+}
+
+.swiperContainer :global(.swiper-pagination) {
+    top: 100% !important;
+}

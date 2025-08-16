@@ -1,0 +1,14 @@
+.circleState{
+    width: 10px;
+    height: 10px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    position: relative;
+    top: 2px;
+}
+.circleState.completed{
+    background-color: green;
+}
+.circleState.uncompleted{
+    background-color: #757575;
+}
