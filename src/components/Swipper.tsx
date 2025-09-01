@@ -19,7 +19,8 @@ const Swipper = ({todolist}:TodoList) =>{
             slidesPerView={3}
             spaceBetween={30}
             pagination={{
-            clickable: true,
+                dynamicBullets: true,
+                clickable: true,
             }}
             modules={[Pagination,Navigation]}
             className={`mySwiper ${styles.swiper}`}
@@ -27,7 +28,7 @@ const Swipper = ({todolist}:TodoList) =>{
             {
                 Array.isArray(todolist)&&todolist.length>0&&
                 todolist.map((todo) => (
-                    <SwiperSlide><CardTodo todo={todo}/></SwiperSlide>
+                    <SwiperSlide key={todo.id}><CardTodo todo={todo}/></SwiperSlide>
                 ))
             }
         </Swiper>

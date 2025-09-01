@@ -4,7 +4,7 @@ import type { Todo } from './types';
 const API_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 export const getTodos = async (): Promise<Todo[]> => {
-  const response = await axios.get<Todo[]>(`${API_URL}?_limit=5`);
+  const response = await axios.get<Todo[]>(`${API_URL}`);
   return response.data;
 };
 
@@ -13,9 +13,10 @@ export const getTask = async (id:number): Promise<Todo> =>{
   return response.data;
 }
 
-export const addTodo = async (title: string): Promise<Todo> => {
+export const addTodo = async (todo:Todo): Promise<Todo> => {
   const response = await axios.post<Todo>(API_URL, {
-    title,
+    id:todo.id,
+    title:todo.title,
     completed: false
   });
   return response.data;

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import EditTask from './EditTask';
 import DeleteTask from './DeleteTask';
+import CreateTask from './CreateTask';
 
 const style = {
   position: 'absolute',
@@ -36,10 +35,10 @@ export default function BasicModal({open,setOpen,act,idSelected}:ModalProps) {
         return <DeleteTask id={idSelected} setOpen={setOpen}/>
         break;
       case "create":
-        return <div>create</div>
+        return <CreateTask setOpen={setOpen} />
         break;
       default:
-        return <div>create</div>
+        return <CreateTask setOpen={setOpen} />
         break;
     }
   }

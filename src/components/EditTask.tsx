@@ -20,10 +20,6 @@ const EditTask = ({id,setOpen}:EditProp) =>{
         title:"",
         completed:false
     });
-    /*
-    useEffect(() =>{
-       dispatch(getTodo(id));
-    },[dispatch,id]);*/
 
     useEffect(() => {
         const selectedTask = list.find(t => t.id === id);
@@ -46,9 +42,9 @@ const EditTask = ({id,setOpen}:EditProp) =>{
         }));
     };
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        console.log(task);
+        console.log("Todo Edit",task);
         dispatch(toggleTodoStatus(task));
         setOpen(false);
     }

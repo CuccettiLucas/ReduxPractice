@@ -16,7 +16,7 @@ const TodoList = () =>{
 
     if(loading) return <h1>Cargando</h1>;
     if(error) return <h2>error</h2>
-    //console.log(list);
+    
     return(
         <Box component="section" sx={{padding:"20px 10px"}}>
             <Typography variant="h2" sx={{fontSize:"1.2em"}} color="primary">Lista de tareas</Typography>

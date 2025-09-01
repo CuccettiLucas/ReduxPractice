@@ -1,4 +1,4 @@
-import { Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper, Button } from "@mui/material";
+import { Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper, Button,TablePagination } from "@mui/material";
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import type { Todo } from "../features/todos/types";
@@ -13,7 +13,20 @@ interface TodoList{
 export default function TableList({todolist}:TodoList) {
     const [open, setOpen] = useState(false);
     const [action, setAction] = useState<string>("");
-    const [idSelected , setIdSelected] = useState<number>(0);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 5));
+        setPage(0);
+    };
+
+    const paginatedTodos = todolist.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);    
+
     const handleOpen = (act:string,id:number) => {
         setOpen(true);
         setAction(act);
@@ -34,10 +47,10 @@ export default function TableList({todolist}:TodoList) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {Array.isArray(todolist)&&todolist.length>0?
-                    todolist.map((t) => (
+                {Array.isArray(paginatedTodos)&&paginatedTodos.length>0?
+                    paginatedTodos.map((t) => (
                     <TableRow
-                        key={t.id}
+                        key={`${t.id}-${t.title}`}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                         <TableCell component="th" scope="row">
@@ -68,6 +81,15 @@ export default function TableList({todolist}:TodoList) {
                 }
             </TableBody>
             </Table>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={todolist.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
         </TableContainer>
         <Button
             sx={{
@@ -79,7 +101,7 @@ export default function TableList({todolist}:TodoList) {
         >
             <AddCircleIcon sx={{ fontSize: '3rem' }}/>
         </Button>
-        <Modal open={open} setOpen={setOpen} act={action} idSelected={idSelected}/>
+        <Modal open={open} setOpen={setOpen} act={action} />
     </>
     );
 }
