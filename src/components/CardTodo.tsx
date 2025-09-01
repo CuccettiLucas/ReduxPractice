@@ -3,12 +3,14 @@ import {Box,Card,CardContent,Typography,Badge} from '@mui/material';
 import styles from "../styles/Decoration.module.css";
 import type { Todo } from '../features/todos/types';
 
+interface CardTodoProps {
+  todo: Todo;
+}
 
-const CardTodo = ({todo}:Todo) =>{
+const CardTodo = ({todo}:CardTodoProps) =>{
     return(
         <Card
             variant="outlined"
-            orientation="horizontal"
             sx={{
                 width: 320,
                 '&:hover': { boxShadow: 'md', borderColor: 'neutral.outlinedHoverBorder' },
@@ -26,7 +28,6 @@ const CardTodo = ({todo}:Todo) =>{
                     >
                 </Badge>
                 <Typography
-                    level="body-sm"
                     aria-describedby="card-description"
                     sx={{ mb: 1 }}
                     >
@@ -42,7 +43,6 @@ const CardTodo = ({todo}:Todo) =>{
                 >
                     <div className={`${styles.circleState} ${todo.completed? styles.completed : styles.uncompleted}`}></div>
                     <Typography
-                        level="body-sm"
                         aria-describedby="card-description"
                         sx={{}}
                         >

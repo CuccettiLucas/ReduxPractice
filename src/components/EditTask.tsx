@@ -1,25 +1,26 @@
-import { Box,TextField,Badge,Checkbox,FormGroup,FormControlLabel,Typography,FormControl,Button } from "@mui/material";
+import { Box,TextField,Checkbox,FormGroup,FormControlLabel,Typography,FormControl,Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../app/store";
-import { getTodo,toggleTodoStatus } from "../features/todos/todosSlice";
+import { toggleTodoStatus } from "../features/todos/todosSlice";
 import { useEffect, useState } from "react";
 import type { Todo } from "../features/todos/types";
 
 
 interface EditProp{
-    id:number;
+    id:number | null;
     setOpen:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EditTask = ({id,setOpen}:EditProp) =>{
 
-    const {list,selectedTodo , loading} = useSelector((state:RootState) => state.todos);
+    const {list, loading} = useSelector((state:RootState) => state.todos);
     const dispatch = useDispatch<AppDispatch>();
     const [task, setTask] = useState<Todo>({
         id:0,
         title:"",
         completed:false
     });
+    
 
     useEffect(() => {
         const selectedTask = list.find(t => t.id === id);

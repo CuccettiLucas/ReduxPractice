@@ -1,6 +1,6 @@
 import { Box,Typography,Badge,Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch,RootState } from "../app/store";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../app/store";
 import { removeTodo } from "../features/todos/todosSlice";
 import type React from "react";
 

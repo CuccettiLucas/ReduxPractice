@@ -15,8 +15,9 @@ export default function TableList({todolist}:TodoList) {
     const [action, setAction] = useState<string>("");
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [idSelected, setIdSelected] = useState<number>(0);
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
         setPage(newPage);
     };
 
@@ -27,10 +28,10 @@ export default function TableList({todolist}:TodoList) {
 
     const paginatedTodos = todolist.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);    
 
-    const handleOpen = (act:string,id:number) => {
+    const handleOpen = (act:string,id?:number) => {
         setOpen(true);
+        setIdSelected(id ?? 0);
         setAction(act);
-        setIdSelected(id);
     };
 
     return (
@@ -101,7 +102,7 @@ export default function TableList({todolist}:TodoList) {
         >
             <AddCircleIcon sx={{ fontSize: '3rem' }}/>
         </Button>
-        <Modal open={open} setOpen={setOpen} act={action} />
+        <Modal open={open} setOpen={setOpen} act={action} idSelected={idSelected}/>
     </>
     );
 }
